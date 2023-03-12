@@ -81,12 +81,15 @@ void* thread_func(void* arg) {
 
     if (i % 100000 == 0) {
       atomic_fetch_add(&plays, thread_plays);
-      atomic_fetch_add(&wins, thread_wins);
+      atomic_fetch_add(&wins,  thread_wins);
 
       thread_plays = 0;
       thread_wins = 0;
     }
   }
+
+  atomic_fetch_add(&plays, thread_plays);
+  atomic_fetch_add(&wins,  thread_wins);
 
   pthread_exit(NULL);
 }
